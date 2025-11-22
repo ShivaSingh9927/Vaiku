@@ -7,13 +7,11 @@ import { Button } from "@/components/ui/button"
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
 
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    setMobileMenuOpen(false)
+  }
 
   const navLinks = [
     { label: "Services", href: "#services" },
@@ -25,7 +23,7 @@ export default function Hero() {
   return (
     <div className="relative min-h-screen text-white overflow-hidden flex flex-col">
 
-      {/* === 🔥 Video Background === */}
+      {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-0"
         src="/vecteezy_digital-background-of-connection-structure-with-spheres-and_7237670.mp4"
@@ -35,7 +33,7 @@ export default function Hero() {
         playsInline
       />
 
-      {/* Dark overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/60 z-0" />
 
       {/* Floating Colors */}
@@ -47,10 +45,10 @@ export default function Hero() {
         />
       </div>
 
-      {/* === Navigation === */}
+      {/* Navigation */}
       <nav className="relative z-20 flex items-center justify-between px-4 md:px-12 py-4 md:py-6">
-        <div className="flex items-center gap-2">
-          <div className="w-8 md:w-10 h-8 md:h-10 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection("top")}>
+          <div className="w-8 md:w-10 h-8 md:h-10 rounded-lg bg-secondary flex items-center justify-center">
             <span className="text-primary font-bold text-sm md:text-lg">V</span>
           </div>
           <span className="font-bold text-sm md:text-xl">VAIKU LABS</span>
@@ -59,46 +57,49 @@ export default function Hero() {
         {/* Desktop menu */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.href}
-              href={link.href}
+              onClick={() => scrollToSection(link.href.replace("#", ""))}
               className="text-sm font-medium hover:text-secondary transition-colors duration-300"
             >
               {link.label}
-            </Link>
+            </button>
           ))}
         </div>
 
         <div className="hidden md:flex gap-4">
-          <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white/10">
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="bg-transparent border border-white text-white px-4 py-2 rounded-lg hover:bg-white/10"
+          >
             Get in Touch
-          </Button>
+          </button>
         </div>
 
         {/* Mobile menu button */}
-        <button
-          className="md:hidden text-white p-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
+        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white p-2">
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-primary/95 backdrop-blur-sm z-30 p-4 space-y-3 animate-fade-in-up">
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-primary/95 backdrop-blur-sm z-30 p-4 space-y-3">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.href}
-              href={link.href}
-              className="block text-white hover:text-secondary transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => scrollToSection(link.href.replace("#", ""))}
+              className="block text-white hover:text-secondary transition-colors py-2 w-full text-left"
             >
               {link.label}
-            </Link>
+            </button>
           ))}
-          <Button className="w-full bg-secondary hover:bg-secondary/90 text-primary">Get in Touch</Button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="w-full bg-secondary hover:bg-secondary/90 text-primary px-4 py-2 rounded"
+          >
+            Get in Touch
+          </button>
         </div>
       )}
 
@@ -114,17 +115,21 @@ export default function Hero() {
           </h1>
 
           <p className="text-md md:text-lg text-white/80 max-w-2xl">
-            We build scalable AI & software solutions that transform businesses. From enterprise automation to custom
-            intelligence systems, we deliver results that matter.
+            We build scalable AI & software solutions that transform businesses — from automation to advanced intelligence.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
-            <Button className="bg-secondary hover:bg-secondary/90 text-primary px-8 py-6 font-semibold w-full sm:w-auto">
+            <Button
+              onClick={() => scrollToSection("services")}
+              className="bg-secondary hover:bg-secondary/90 text-primary px-8 py-6 font-semibold"
+            >
               Explore Services
             </Button>
+
             <Button
               variant="outline"
-              className="bg-transparent border-white text-white hover:bg-white/10 px-8 py-6 font-semibold w-full sm:w-auto"
+              onClick={() => scrollToSection("contact")}
+              className="bg-white/10 border-white text-white hover:bg-white/30 px-8 py-6 font-semibold w-full sm:w-auto"
             >
               Get a Consultation
             </Button>
