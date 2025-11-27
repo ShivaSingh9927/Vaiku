@@ -1,13 +1,11 @@
-[00:00:00.732] Server  LOG      ✓ Ready in 461ms
-[00:00:04.403] Server  ERROR   An empty string ("") was passed to the src attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to src instead of an empty string.
-[00:00:18.126] Server  LOG     EmailJS Response => "The Public Key is required. To find this ID, visit https://dashboard.emailjs.com/admin/account"
-[00:00:18.128] Server  ERROR   ❌ Email Send Error: "The Public Key is required. To find this ID, visit https://dashboard.emailjs.com/admin/account"
-[00:01:52.879] Server  LOG        Reload env: .env.local
-[00:01:59.972] Server  LOG        Reload env: .env.local
-[00:02:06.848] Server  LOG        Reload env: .env.local
-[00:02:13.921] Server  LOG        Reload env: .env.local
-[00:02:17.000] Server  LOG        Reload env: .env.local
-[00:02:19.045] Server  LOG        Reload env: .env.local
-[00:02:20.594] Server  LOG        Reload env: .env.local
-[00:02:31.747] Server  LOG     EmailJS Response => "The Public Key is required. To find this ID, visit https://dashboard.emailjs.com/admin/account"
-[00:02:31.749] Server  ERROR   ❌ Email Send Error: "The Public Key is required. To find this ID, visit https://dashboard.emailjs.com/admin/account"
+[00:00:00.777] Server  LOG      ✓ Ready in 498ms
+[00:00:11.918] Server  ERROR   An empty string ("") was passed to the src attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to src instead of an empty string.
+[00:00:15.062] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:15.062] Browser ERROR   An empty string ("") was passed to the %s attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to %s instead of an empty string. src src
+[00:00:15.062] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:15.062] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:15.062] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:35243/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:35243/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1764226174623}
+[00:00:41.529] Browser LOG     Fullscreen change detected
+[00:00:48.787] Browser LOG     Fullscreen change detected
+[00:03:34.492] Server  LOG      ✓ Compiled in 78ms
+[00:03:37.826] Server  LOG      ✓ Compiled in 57ms

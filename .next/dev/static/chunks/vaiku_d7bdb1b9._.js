@@ -617,46 +617,85 @@ function CaseStudies() {
     // Modal state
     const [modalOpen, setModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [modalIndex, setModalIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    const [modalMuted, setModalMuted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true) // start muted, user can toggle (Ask toggle)
-    ;
+    const [modalMuted, setModalMuted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    // --- CASE DATA ---
     const cases = [
         {
             id: 1,
             title: "MarkoAI",
             subtitle: "One-stop marketing campaign creator",
-            description: "MarkoAI is a one-stop solution for creating marketing campaigns that generate promotion ad ideas, images, and posts. It helps teams ideate, produce visuals, and produce ready-to-publish marketing assets quickly.",
+            description: "MarkoAI is a one-stop solution for creating marketing campaigns...",
             video: "/Markoai.mp4"
         },
         {
             id: 2,
             title: "MedAssist AI",
             subtitle: "Next-gen clinical decision support",
-            description: "MedAssist-AI is a next-generation clinical decision support system built on advanced AI and multimodal healthcare capabilities. Features include chest X-ray abnormality classification, bounding-box disease detection, OCR-based report understanding, evidence-based recommendations via literature retrieval, web search for latest clinical knowledge, and conversational assistance for clinicians — improving speed, accuracy and reducing staff workload while keeping patient safety and privacy central.",
+            description: "MedAssist-AI is a next-generation clinical decision support system...",
             video: "/MedAssit-AI.mp4"
         },
         {
             id: 3,
             title: "NHAI NHMMS",
-            subtitle: "Smart highway monitoring & hygiene system",
-            description: "NHMMS is a smart monitoring and feedback system designed to ensure hygiene, transparency, and accountability in highway toilet maintenance. Key features include worker dashboards for uploading activities and photos, QR-based activity submission, AI scoring for cleanliness, public feedback, damage reporting, and a centralized analytics dashboard for benchmarking and monitoring.",
+            subtitle: "Smart highway monitoring system",
+            description: "NHMMS is a smart monitoring, AI scoring and analytics system...",
             video: "/NHAI_NHMMS.mp4"
         },
         {
             id: 4,
             title: "SensAi (Ongoing)",
-            subtitle: "Ongoing AI-driven prenatal screening project",
-            description: "SensAi is an AI-powered fetal ultrasound screening solution that detects congenital heart defects and fetal risks in real-time. It empowers clinicians in all settings — from advanced hospitals to rural clinics — by delivering specialist-level diagnosis instantly and offline. Every heartbeat matters.",
+            subtitle: "AI prenatal screening project",
+            description: "SensAi detects congenital heart defects...",
             video: "/Sensai-video.mp4"
         },
         {
             id: 5,
             title: "AIM-N",
-            subtitle: "Automated Intelligent Market Notifier (Ongoing)",
-            description: "AIM-N is an automated market analysis and opportunity alerting system. It continuously evaluates financial markets using multiple client-driven trading strategies and real-time indicators. Every day, AIM-N generates new opportunity insights and instantly notifies the user via WhatsApp and email—ensuring traders never miss profitable entry points.",
+            subtitle: "Market Notifier",
+            description: "Real-time automated trading insights...",
             video: ""
         }
     ];
-    // Intersection Observer to autoplay preview when visible
+    // ============================================================
+    // ✔ MOBILE FIX: Prevent fullscreen + exit fullscreen on close
+    // ============================================================
+    const exitFullscreen = ()=>{
+        if (document.fullscreenElement) {
+            document.exitFullscreen?.();
+        }
+        // iOS Safari hack
+        const anyVideo = document.querySelector("video");
+        anyVideo?.webkitExitFullscreen?.();
+    };
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "CaseStudies.useEffect": ()=>{
+            const fsHandler = {
+                "CaseStudies.useEffect.fsHandler": ()=>{
+                    // This runs when user enters fullscreen
+                    console.log("Fullscreen change detected");
+                }
+            }["CaseStudies.useEffect.fsHandler"];
+            document.addEventListener("fullscreenchange", fsHandler);
+            document.addEventListener("webkitfullscreenchange", fsHandler);
+            return ({
+                "CaseStudies.useEffect": ()=>{
+                    document.removeEventListener("fullscreenchange", fsHandler);
+                    document.removeEventListener("webkitfullscreenchange", fsHandler);
+                }
+            })["CaseStudies.useEffect"];
+        }
+    }["CaseStudies.useEffect"], []);
+    const openModal = (index)=>{
+        setModalIndex(index);
+        setModalMuted(true);
+        setModalOpen(true);
+    };
+    const closeModal = ()=>{
+        exitFullscreen(); // IMPORTANT FIX
+        setModalOpen(false);
+        setModalIndex(null);
+    };
+    // IntersectionObserver for autoplay preview cards
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "CaseStudies.useEffect": ()=>{
             const observer = new IntersectionObserver({
@@ -668,15 +707,11 @@ function CaseStudies() {
                             const index = Number(idxAttr);
                             if (entry.isIntersecting) {
                                 setVisibleItems({
-                                    "CaseStudies.useEffect": (prev)=>{
-                                        if (!prev.includes(index)) return [
+                                    "CaseStudies.useEffect": (prev)=>prev.includes(index) ? prev : [
                                             ...prev,
                                             index
-                                        ];
-                                        return prev;
-                                    }
+                                        ]
                                 }["CaseStudies.useEffect"]);
-                                // play preview muted
                                 const v = videoRefs.current[index];
                                 if (v && v.paused && !modalOpen) {
                                     v.muted = true;
@@ -685,7 +720,6 @@ function CaseStudies() {
                                     }["CaseStudies.useEffect"]);
                                 }
                             } else {
-                                // pause preview when out of view
                                 const v = videoRefs.current[index];
                                 if (v && !modalOpen) {
                                     v.pause();
@@ -697,8 +731,7 @@ function CaseStudies() {
                 }
             }["CaseStudies.useEffect"], {
                 threshold: 0.4
-            } // start playing when 40% visible
-            );
+            });
             previewObserverRef.current = observer;
             document.querySelectorAll("[data-case-item]").forEach({
                 "CaseStudies.useEffect": (el)=>observer.observe(el)
@@ -706,69 +739,12 @@ function CaseStudies() {
             return ({
                 "CaseStudies.useEffect": ()=>{
                     previewObserverRef.current?.disconnect();
-                    previewObserverRef.current = null;
                 }
-            })["CaseStudies.useEffect"];
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        }
-    }["CaseStudies.useEffect"], [
-        modalOpen
-    ]);
-    // Pause previews when modal opens
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "CaseStudies.useEffect": ()=>{
-            if (modalOpen) {
-                videoRefs.current.forEach({
-                    "CaseStudies.useEffect": (v)=>{
-                        try {
-                            v.pause();
-                        } catch  {}
-                    }
-                }["CaseStudies.useEffect"]);
-            } else {
-                // when closing modal, resume previews for visible items
-                visibleItems.forEach({
-                    "CaseStudies.useEffect": (index)=>{
-                        const v = videoRefs.current[index];
-                        if (v) {
-                            v.muted = true;
-                            v.play().catch({
-                                "CaseStudies.useEffect": ()=>{}
-                            }["CaseStudies.useEffect"]);
-                        }
-                    }
-                }["CaseStudies.useEffect"]);
-            }
-        }
-    }["CaseStudies.useEffect"], [
-        modalOpen,
-        visibleItems
-    ]);
-    // Keyboard: ESC closes modal
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "CaseStudies.useEffect": ()=>{
-            const onKey = {
-                "CaseStudies.useEffect.onKey": (e)=>{
-                    if (e.key === "Escape" && modalOpen) setModalOpen(false);
-                }
-            }["CaseStudies.useEffect.onKey"];
-            window.addEventListener("keydown", onKey);
-            return ({
-                "CaseStudies.useEffect": ()=>window.removeEventListener("keydown", onKey)
             })["CaseStudies.useEffect"];
         }
     }["CaseStudies.useEffect"], [
         modalOpen
     ]);
-    const openModal = (index)=>{
-        setModalIndex(index);
-        setModalMuted(true); // start muted and ask user to toggle
-        setModalOpen(true);
-    };
-    const closeModal = ()=>{
-        setModalOpen(false);
-        setModalIndex(null);
-    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -778,28 +754,28 @@ function CaseStudies() {
                     className: "max-w-7xl mx-auto px-5",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "text-center space-y-3 md:space-y-4 mb-12 md:mb-16",
+                            className: "text-center space-y-4 mb-16",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                     className: "text-4xl md:text-5xl font-bold",
                                     children: "Our Projects"
                                 }, void 0, false, {
                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                    lineNumber: 153,
+                                    lineNumber: 151,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-lg text-neutral-400",
-                                    children: "Real projects creating real-world impact"
+                                    children: "Real projects creating impact"
                                 }, void 0, false, {
                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                    lineNumber: 154,
+                                    lineNumber: 152,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/vaiku/components/case-studies.tsx",
-                            lineNumber: 152,
+                            lineNumber: 150,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -810,8 +786,7 @@ function CaseStudies() {
                                     "data-case-item": true,
                                     "data-index": index,
                                     className: `relative rounded-xl overflow-hidden border border-neutral-800 bg-neutral-800 transition-all duration-500 cursor-pointer
-                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
-                  `,
+                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`,
                                     onClick: ()=>openModal(index),
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -825,40 +800,40 @@ function CaseStudies() {
                                                     muted: true,
                                                     loop: true,
                                                     playsInline: true,
+                                                    "webkit-playsinline": "true",
+                                                    "x5-playsinline": "true",
                                                     preload: "metadata",
                                                     className: "w-full h-56 object-contain"
                                                 }, void 0, false, {
                                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                    lineNumber: 172,
+                                                    lineNumber: 169,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "absolute inset-0 flex items-center justify-center pointer-events-none",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "flex items-center justify-center bg-black/40 rounded-full w-14 h-14 backdrop-blur-sm",
-                                                        "aria-hidden": true,
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$play$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Play$3e$__["Play"], {
-                                                            size: 20,
-                                                            className: "text-white"
+                                                            size: 20
                                                         }, void 0, false, {
                                                             fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                            lineNumber: 189,
+                                                            lineNumber: 185,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 185,
+                                                        lineNumber: 184,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                    lineNumber: 184,
+                                                    lineNumber: 183,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/vaiku/components/case-studies.tsx",
-                                            lineNumber: 171,
+                                            lineNumber: 168,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -869,15 +844,15 @@ function CaseStudies() {
                                                     children: item.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                    lineNumber: 196,
+                                                    lineNumber: 192,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-sm text-primary",
+                                                    className: "text-sm text-white",
                                                     children: item.subtitle
                                                 }, void 0, false, {
                                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                    lineNumber: 197,
+                                                    lineNumber: 193,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -885,54 +860,51 @@ function CaseStudies() {
                                                     children: item.description
                                                 }, void 0, false, {
                                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                    lineNumber: 198,
+                                                    lineNumber: 194,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/vaiku/components/case-studies.tsx",
-                                            lineNumber: 195,
+                                            lineNumber: 191,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, item.id, true, {
                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                    lineNumber: 161,
+                                    lineNumber: 159,
                                     columnNumber: 17
                                 }, this);
                             })
                         }, void 0, false, {
                             fileName: "[project]/vaiku/components/case-studies.tsx",
-                            lineNumber: 157,
+                            lineNumber: 155,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                    lineNumber: 151,
+                    lineNumber: 149,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                lineNumber: 150,
+                lineNumber: 148,
                 columnNumber: 7
             }, this),
             modalOpen && modalIndex !== null && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "fixed inset-0 z-50 flex items-center justify-center px-4 py-8",
-                role: "dialog",
-                "aria-modal": "true",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "absolute inset-0 bg-black/70 backdrop-blur-sm",
-                        onClick: closeModal,
-                        "aria-hidden": true
+                        onClick: closeModal
                     }, void 0, false, {
                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                        lineNumber: 215,
+                        lineNumber: 206,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "relative z-60 max-w-5xl w-full bg-neutral-900 rounded-xl shadow-xl overflow-hidden",
+                        className: "relative max-w-5xl w-full bg-neutral-900 rounded-xl shadow-xl overflow-hidden z-50",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex items-center justify-between p-4 border-b border-neutral-800",
@@ -944,7 +916,7 @@ function CaseStudies() {
                                                 children: cases[modalIndex].title
                                             }, void 0, false, {
                                                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                lineNumber: 225,
+                                                lineNumber: 213,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -952,13 +924,13 @@ function CaseStudies() {
                                                 children: cases[modalIndex].subtitle
                                             }, void 0, false, {
                                                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                lineNumber: 226,
+                                                lineNumber: 214,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                                        lineNumber: 224,
+                                        lineNumber: 212,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -966,20 +938,19 @@ function CaseStudies() {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: ()=>setModalMuted((s)=>!s),
-                                                className: "inline-flex items-center gap-2 px-3 py-2 rounded-md bg-neutral-800 hover:bg-neutral-700 transition",
-                                                "aria-label": modalMuted ? "Unmute video" : "Mute video",
+                                                className: "px-3 py-2 rounded-md bg-neutral-800 hover:bg-neutral-700 flex items-center gap-2",
                                                 children: [
                                                     modalMuted ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$volume$2d$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__VolumeX$3e$__["VolumeX"], {
                                                         size: 16
                                                     }, void 0, false, {
                                                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 236,
+                                                        lineNumber: 222,
                                                         columnNumber: 33
                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$volume$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Volume$3e$__["Volume"], {
                                                         size: 16
                                                     }, void 0, false, {
                                                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 236,
+                                                        lineNumber: 222,
                                                         columnNumber: 57
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -987,63 +958,67 @@ function CaseStudies() {
                                                         children: modalMuted ? "Sound off" : "Sound on"
                                                     }, void 0, false, {
                                                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 237,
+                                                        lineNumber: 223,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                lineNumber: 231,
+                                                lineNumber: 218,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                onClick: closeModal,
-                                                className: "p-2 rounded-md hover:bg-neutral-800 transition",
-                                                "aria-label": "Close",
+                                                onClick: ()=>{
+                                                    exitFullscreen();
+                                                    closeModal();
+                                                },
+                                                className: "p-2 rounded-md hover:bg-neutral-800",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__["X"], {
                                                     size: 20
                                                 }, void 0, false, {
                                                     fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                    lineNumber: 246,
+                                                    lineNumber: 234,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                lineNumber: 241,
+                                                lineNumber: 227,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                                        lineNumber: 229,
+                                        lineNumber: 217,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                                lineNumber: 223,
+                                lineNumber: 211,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "grid grid-cols-1 md:grid-cols-2 gap-4",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "w-full bg-black",
+                                        className: "bg-black w-full",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("video", {
                                             src: cases[modalIndex].video,
                                             controls: true,
                                             autoPlay: true,
                                             muted: modalMuted,
                                             playsInline: true,
+                                            "webkit-playsinline": "true",
+                                            "x5-playsinline": "true",
                                             className: "w-full h-96 md:h-[520px] object-cover bg-black"
                                         }, cases[modalIndex].video, false, {
                                             fileName: "[project]/vaiku/components/case-studies.tsx",
-                                            lineNumber: 254,
+                                            lineNumber: 243,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                                        lineNumber: 253,
+                                        lineNumber: 242,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1054,7 +1029,7 @@ function CaseStudies() {
                                                 children: "About the project"
                                             }, void 0, false, {
                                                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                lineNumber: 266,
+                                                lineNumber: 258,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1062,152 +1037,37 @@ function CaseStudies() {
                                                 children: cases[modalIndex].description
                                             }, void 0, false, {
                                                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                lineNumber: 267,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "pt-4 space-y-2",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "text-xs text-neutral-400 uppercase tracking-wide",
-                                                                children: "Deliverables"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                                lineNumber: 272,
-                                                                columnNumber: 21
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "text-sm text-neutral-200",
-                                                                children: "Video demo, Documentation, Deployment"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                                lineNumber: 273,
-                                                                columnNumber: 21
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 271,
-                                                        columnNumber: 19
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "text-xs text-neutral-400 uppercase tracking-wide",
-                                                                children: "Tech"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                                lineNumber: 277,
-                                                                columnNumber: 21
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "text-sm text-neutral-200",
-                                                                children: "AI, Computer Vision, OCR, Web"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                                lineNumber: 278,
-                                                                columnNumber: 21
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 276,
-                                                        columnNumber: 19
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "text-xs text-neutral-400 uppercase tracking-wide",
-                                                                children: "Role"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                                lineNumber: 282,
-                                                                columnNumber: 21
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "text-sm text-neutral-200",
-                                                                children: "Design, Implementation, DevOps"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                                lineNumber: 283,
-                                                                columnNumber: 21
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 281,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                lineNumber: 270,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "pt-6 flex gap-3",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                        className: "px-4 py-2 rounded-md bg-primary hover:bg-primary/90 transition text-white",
-                                                        onClick: ()=>{
-                                                            // for example: navigate to project details page or download
-                                                            // placeholder: close modal
-                                                            closeModal();
-                                                        },
-                                                        children: "View More"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 288,
-                                                        columnNumber: 19
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                        className: "px-4 py-2 rounded-md border border-neutral-700 text-neutral-200 hover:bg-neutral-800 transition",
-                                                        onClick: ()=>{
-                                                            // toggle sound quickly
-                                                            setModalMuted((s)=>!s);
-                                                        },
-                                                        children: modalMuted ? "Enable Sound" : "Disable Sound"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                        lineNumber: 299,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/vaiku/components/case-studies.tsx",
-                                                lineNumber: 287,
+                                                lineNumber: 259,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                                        lineNumber: 265,
+                                        lineNumber: 257,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                                lineNumber: 252,
+                                lineNumber: 240,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/vaiku/components/case-studies.tsx",
-                        lineNumber: 221,
+                        lineNumber: 208,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/vaiku/components/case-studies.tsx",
-                lineNumber: 209,
+                lineNumber: 205,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true);
 }
-_s(CaseStudies, "FoxGtGdaLkhJwCohYVdlf2uE8y0=");
+_s(CaseStudies, "dNsG8SLSRCOKcQ5busoWxS2esl4=");
 _c = CaseStudies;
 var _c;
 __turbopack_context__.k.register(_c, "CaseStudies");

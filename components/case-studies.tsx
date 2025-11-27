@@ -19,15 +19,16 @@ export default function CaseStudies() {
   // Modal state
   const [modalOpen, setModalOpen] = useState(false)
   const [modalIndex, setModalIndex] = useState<number | null>(null)
-  const [modalMuted, setModalMuted] = useState(true) // start muted, user can toggle (Ask toggle)
+  const [modalMuted, setModalMuted] = useState(true)
 
+  // --- CASE DATA ---
   const cases: CaseItem[] = [
     {
       id: 1,
       title: "MarkoAI",
       subtitle: "One-stop marketing campaign creator",
       description:
-        "MarkoAI is a one-stop solution for creating marketing campaigns that generate promotion ad ideas, images, and posts. It helps teams ideate, produce visuals, and produce ready-to-publish marketing assets quickly.",
+        "MarkoAI is a one-stop solution for creating marketing campaigns...",
       video: "/Markoai.mp4",
     },
     {
@@ -35,36 +36,75 @@ export default function CaseStudies() {
       title: "MedAssist AI",
       subtitle: "Next-gen clinical decision support",
       description:
-        "MedAssist-AI is a next-generation clinical decision support system built on advanced AI and multimodal healthcare capabilities. Features include chest X-ray abnormality classification, bounding-box disease detection, OCR-based report understanding, evidence-based recommendations via literature retrieval, web search for latest clinical knowledge, and conversational assistance for clinicians — improving speed, accuracy and reducing staff workload while keeping patient safety and privacy central.",
+        "MedAssist-AI is a next-generation clinical decision support system...",
       video: "/MedAssit-AI.mp4",
     },
     {
       id: 3,
       title: "NHAI NHMMS",
-      subtitle: "Smart highway monitoring & hygiene system",
+      subtitle: "Smart highway monitoring system",
       description:
-        "NHMMS is a smart monitoring and feedback system designed to ensure hygiene, transparency, and accountability in highway toilet maintenance. Key features include worker dashboards for uploading activities and photos, QR-based activity submission, AI scoring for cleanliness, public feedback, damage reporting, and a centralized analytics dashboard for benchmarking and monitoring.",
+        "NHMMS is a smart monitoring, AI scoring and analytics system...",
       video: "/NHAI_NHMMS.mp4",
     },
     {
       id: 4,
       title: "SensAi (Ongoing)",
-      subtitle: "Ongoing AI-driven prenatal screening project",
-      description:
-        "SensAi is an AI-powered fetal ultrasound screening solution that detects congenital heart defects and fetal risks in real-time. It empowers clinicians in all settings — from advanced hospitals to rural clinics — by delivering specialist-level diagnosis instantly and offline. Every heartbeat matters.",
+      subtitle: "AI prenatal screening project",
+      description: "SensAi detects congenital heart defects...",
       video: "/Sensai-video.mp4",
     },
     {
       id: 5,
       title: "AIM-N",
-      subtitle: "Automated Intelligent Market Notifier (Ongoing)",
-      description:
-        "AIM-N is an automated market analysis and opportunity alerting system. It continuously evaluates financial markets using multiple client-driven trading strategies and real-time indicators. Every day, AIM-N generates new opportunity insights and instantly notifies the user via WhatsApp and email—ensuring traders never miss profitable entry points.",
-      video: "", // no video yet (placeholder)
-    }
+      subtitle: "Market Notifier",
+      description: "Real-time automated trading insights...",
+      video: "",
+    },
   ]
 
-  // Intersection Observer to autoplay preview when visible
+  // ============================================================
+  // ✔ MOBILE FIX: Prevent fullscreen + exit fullscreen on close
+  // ============================================================
+
+  const exitFullscreen = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.()
+    }
+
+    // iOS Safari hack
+    const anyVideo = document.querySelector("video") as any
+    anyVideo?.webkitExitFullscreen?.()
+  }
+
+  useEffect(() => {
+    const fsHandler = () => {
+      // This runs when user enters fullscreen
+      console.log("Fullscreen change detected")
+    }
+
+    document.addEventListener("fullscreenchange", fsHandler)
+    document.addEventListener("webkitfullscreenchange", fsHandler)
+
+    return () => {
+      document.removeEventListener("fullscreenchange", fsHandler)
+      document.removeEventListener("webkitfullscreenchange", fsHandler)
+    }
+  }, [])
+
+  const openModal = (index: number) => {
+    setModalIndex(index)
+    setModalMuted(true)
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    exitFullscreen() // IMPORTANT FIX
+    setModalOpen(false)
+    setModalIndex(null)
+  }
+
+  // IntersectionObserver for autoplay preview cards
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -72,19 +112,17 @@ export default function CaseStudies() {
           const idxAttr = entry.target.getAttribute("data-index")
           if (!idxAttr) return
           const index = Number(idxAttr)
+
           if (entry.isIntersecting) {
-            setVisibleItems((prev) => {
-              if (!prev.includes(index)) return [...prev, index]
-              return prev
-            })
-            // play preview muted
+            setVisibleItems((prev) =>
+              prev.includes(index) ? prev : [...prev, index]
+            )
             const v = videoRefs.current[index]
             if (v && v.paused && !modalOpen) {
               v.muted = true
               v.play().catch(() => {})
             }
           } else {
-            // pause preview when out of view
             const v = videoRefs.current[index]
             if (v && !modalOpen) {
               v.pause()
@@ -93,65 +131,25 @@ export default function CaseStudies() {
           }
         })
       },
-      { threshold: 0.4 } // start playing when 40% visible
+      { threshold: 0.4 }
     )
 
     previewObserverRef.current = observer
     document.querySelectorAll("[data-case-item]").forEach((el) => observer.observe(el))
+
     return () => {
       previewObserverRef.current?.disconnect()
-      previewObserverRef.current = null
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalOpen])
-
-  // Pause previews when modal opens
-  useEffect(() => {
-    if (modalOpen) {
-      videoRefs.current.forEach((v) => {
-        try {
-          v.pause()
-        } catch {}
-      })
-    } else {
-      // when closing modal, resume previews for visible items
-      visibleItems.forEach((index) => {
-        const v = videoRefs.current[index]
-        if (v) {
-          v.muted = true
-          v.play().catch(() => {})
-        }
-      })
-    }
-  }, [modalOpen, visibleItems])
-
-  // Keyboard: ESC closes modal
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && modalOpen) setModalOpen(false)
-    }
-    window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
-  }, [modalOpen])
-
-  const openModal = (index: number) => {
-    setModalIndex(index)
-    setModalMuted(true) // start muted and ask user to toggle
-    setModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setModalOpen(false)
-    setModalIndex(null)
-  }
 
   return (
     <>
+      {/* ===================== CASE GRID ===================== */}
       <section id="cases" className="py-20 md:py-32 bg-neutral-900 text-white">
         <div className="max-w-7xl mx-auto px-5">
-          <div className="text-center space-y-3 md:space-y-4 mb-12 md:mb-16">
+          <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl md:text-5xl font-bold">Our Projects</h2>
-            <p className="text-lg text-neutral-400">Real projects creating real-world impact</p>
+            <p className="text-lg text-neutral-400">Real projects creating impact</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -163,11 +161,10 @@ export default function CaseStudies() {
                   data-case-item
                   data-index={index}
                   className={`relative rounded-xl overflow-hidden border border-neutral-800 bg-neutral-800 transition-all duration-500 cursor-pointer
-                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
-                  `}
+                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                   onClick={() => openModal(index)}
                 >
-                  {/* video preview */}
+                  {/* Preview Video */}
                   <div className="relative">
                     <video
                       ref={(el) => {
@@ -177,24 +174,23 @@ export default function CaseStudies() {
                       muted
                       loop
                       playsInline
+                      webkit-playsinline="true"
+                      x5-playsinline="true"
                       preload="metadata"
                       className="w-full h-56 object-contain"
                     />
-                    {/* Play overlay icon (always visible but subtle) */}
+
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div
-                        className="flex items-center justify-center bg-black/40 rounded-full w-14 h-14 backdrop-blur-sm"
-                        aria-hidden
-                      >
-                        <Play size={20} className="text-white" />
+                      <div className="flex items-center justify-center bg-black/40 rounded-full w-14 h-14 backdrop-blur-sm">
+                        <Play size={20} />
                       </div>
                     </div>
                   </div>
 
-                  {/* content */}
+                  {/* Card Content */}
                   <div className="p-6 space-y-3">
                     <h3 className="text-xl font-bold">{item.title}</h3>
-                    <p className="text-sm text-primary">{item.subtitle}</p>
+                    <p className="text-sm text-white">{item.subtitle}</p>
                     <p className="text-sm text-neutral-300 line-clamp-3">{item.description}</p>
                   </div>
                 </article>
@@ -204,22 +200,14 @@ export default function CaseStudies() {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* ===================== MODAL ===================== */}
       {modalOpen && modalIndex !== null && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center px-4 py-8"
-          role="dialog"
-          aria-modal="true"
-        >
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-            onClick={closeModal}
-            aria-hidden
-          />
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-8">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeModal} />
 
-          <div className="relative z-60 max-w-5xl w-full bg-neutral-900 rounded-xl shadow-xl overflow-hidden">
-            {/* top controls */}
+          <div className="relative max-w-5xl w-full bg-neutral-900 rounded-xl shadow-xl overflow-hidden z-50">
+
+            {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-neutral-800">
               <div>
                 <h3 className="text-lg font-bold">{cases[modalIndex].title}</h3>
@@ -227,30 +215,31 @@ export default function CaseStudies() {
               </div>
 
               <div className="flex items-center gap-3">
-                {/* Sound toggle (Ask toggle) */}
                 <button
                   onClick={() => setModalMuted((s) => !s)}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-neutral-800 hover:bg-neutral-700 transition"
-                  aria-label={modalMuted ? "Unmute video" : "Mute video"}
+                  className="px-3 py-2 rounded-md bg-neutral-800 hover:bg-neutral-700 flex items-center gap-2"
                 >
                   {modalMuted ? <VolumeX size={16} /> : <Volume size={16} />}
                   <span className="text-sm">{modalMuted ? "Sound off" : "Sound on"}</span>
                 </button>
 
-                {/* Close */}
+                {/* FIXED CLOSE BUTTON */}
                 <button
-                  onClick={closeModal}
-                  className="p-2 rounded-md hover:bg-neutral-800 transition"
-                  aria-label="Close"
+                  onClick={() => {
+                    exitFullscreen()
+                    closeModal()
+                  }}
+                  className="p-2 rounded-md hover:bg-neutral-800"
                 >
                   <X size={20} />
                 </button>
               </div>
             </div>
 
-            {/* Video + details */}
+            {/* Main content */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="w-full bg-black">
+              {/* VIDEO */}
+              <div className="bg-black w-full">
                 <video
                   key={cases[modalIndex].video}
                   src={cases[modalIndex].video}
@@ -258,54 +247,18 @@ export default function CaseStudies() {
                   autoPlay
                   muted={modalMuted}
                   playsInline
+                  webkit-playsinline="true"
+                  x5-playsinline="true"
                   className="w-full h-96 md:h-[520px] object-cover bg-black"
                 />
               </div>
 
+              {/* DESCRIPTION */}
               <div className="p-6 space-y-4">
                 <h4 className="text-lg font-semibold">About the project</h4>
-                <p className="text-sm text-neutral-300 whitespace-pre-line">{cases[modalIndex].description}</p>
-
-                {/* Optional extra metadata — you can expand these */}
-                <div className="pt-4 space-y-2">
-                  <div>
-                    <p className="text-xs text-neutral-400 uppercase tracking-wide">Deliverables</p>
-                    <p className="text-sm text-neutral-200">Video demo, Documentation, Deployment</p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-neutral-400 uppercase tracking-wide">Tech</p>
-                    <p className="text-sm text-neutral-200">AI, Computer Vision, OCR, Web</p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-neutral-400 uppercase tracking-wide">Role</p>
-                    <p className="text-sm text-neutral-200">Design, Implementation, DevOps</p>
-                  </div>
-                </div>
-
-                <div className="pt-6 flex gap-3">
-                  <button
-                    className="px-4 py-2 rounded-md bg-primary hover:bg-primary/90 transition text-white"
-                    onClick={() => {
-                      // for example: navigate to project details page or download
-                      // placeholder: close modal
-                      closeModal()
-                    }}
-                  >
-                    View More
-                  </button>
-
-                  <button
-                    className="px-4 py-2 rounded-md border border-neutral-700 text-neutral-200 hover:bg-neutral-800 transition"
-                    onClick={() => {
-                      // toggle sound quickly
-                      setModalMuted((s) => !s)
-                    }}
-                  >
-                    {modalMuted ? "Enable Sound" : "Disable Sound"}
-                  </button>
-                </div>
+                <p className="text-sm text-neutral-300 whitespace-pre-line">
+                  {cases[modalIndex].description}
+                </p>
               </div>
             </div>
           </div>
