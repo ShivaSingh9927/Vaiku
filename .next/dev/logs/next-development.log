@@ -1,11 +1,11 @@
-[00:00:00.777] Server  LOG      ✓ Ready in 498ms
-[00:00:11.918] Server  ERROR   An empty string ("") was passed to the src attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to src instead of an empty string.
-[00:00:15.062] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:15.062] Browser ERROR   An empty string ("") was passed to the %s attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to %s instead of an empty string. src src
-[00:00:15.062] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:15.062] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:15.062] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:35243/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:35243/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1764226174623}
-[00:00:41.529] Browser LOG     Fullscreen change detected
-[00:00:48.787] Browser LOG     Fullscreen change detected
-[00:03:34.492] Server  LOG      ✓ Compiled in 78ms
-[00:03:37.826] Server  LOG      ✓ Compiled in 57ms
+[00:00:00.770] Server  LOG      ✓ Ready in 492ms
+[00:00:07.012] Server  ERROR   An empty string ("") was passed to the src attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to src instead of an empty string.
+[00:00:23.800] Server  LOG     EmailJS Response: "API calls in strict mode, but no private key was passed"
+[00:00:23.802] Server  ERROR   ❌ Email Send Error: "API calls in strict mode, but no private key was passed"
+[00:03:16.678] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:16.678] Browser ERROR   An empty string ("") was passed to the %s attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to %s instead of an empty string. src src
+[00:03:16.678] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:03:16.678] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:03:16.678] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:35243/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:35243/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1764228855521}
+[00:05:24.812] Server  LOG     EmailJS Response: "OK"
+[00:11:03.278] Server  LOG     EmailJS Response: "OK"

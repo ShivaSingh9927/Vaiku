@@ -53,30 +53,32 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$nex
 async function POST(req) {
     try {
         const body = await req.json();
-        const payload = {
-            service_id: ("TURBOPACK compile-time value", "service_bb85x5r"),
-            template_id: ("TURBOPACK compile-time value", "template_rud6nyl"),
-            public_key: ("TURBOPACK compile-time value", "6RL6qXQjpWLUw7L3y"),
-            template_params: {
-                name: body.name,
-                email: body.email,
-                message: `
+        // Create a full message including all fields
+        const fullMessage = `
+Name: ${body.name}
+Email: ${body.email}
 Company: ${body.company || "Not Provided"}
-Industry: ${body.domain || "Not Provided"}
+Domain: ${body.domain || "Not Provided"}
 Message: ${body.message}
-        `
+    `;
+        const payload = {
+            service_id: process.env.EMAILJS_SERVICE_ID,
+            template_id: process.env.EMAILJS_TEMPLATE_ID,
+            user_id: process.env.EMAILJS_PUBLIC_KEY,
+            template_params: {
+                message: fullMessage
             }
         };
-        const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(payload)
         });
-        const text = await response.text();
-        console.log("EmailJS Response =>", text);
-        if (!response.ok) throw new Error(text);
+        const responseText = await res.text();
+        console.log("EmailJS Response:", responseText);
+        if (!res.ok) throw new Error(responseText);
         return __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: true
         });
