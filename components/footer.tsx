@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0">
                 <span className="text-primary font-bold">V</span>
               </div>
-              <span className="font-bold text-lg">VAIKU LABS</span>
+              <span className="font-bold text-lg">NueraLogic</span>
             </div>
             <p className="text-white/70 text-xs md:text-sm">Intelligent Solutions. Empowered Futures.</p>
           </div>
@@ -98,7 +98,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-white/10 pt-6 md:pt-8">
           <div className="grid sm:grid-cols-2 gap-3 md:gap-4 text-xs md:text-sm text-white/60">
-            <div>© 2025 Vaiku Labs. All rights reserved.</div>
+            <div>© 2025 Nueralogic. All rights reserved.</div>
             <div className="flex gap-3 md:gap-4 sm:justify-end">
               <Link href="#" className="hover:text-white transition-colors">
                 Privacy Policy

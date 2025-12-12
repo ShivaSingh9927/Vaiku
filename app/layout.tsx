@@ -11,7 +11,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "VAIKU LABS - AI & Software Solutions",
+  title: "Nueralogic - AI & Software Solutions",
   description:
     "Intelligent Solutions. Empowered Futures. Transforming businesses with AI, cloud-native software development, and digital automation.",
   generator: "v0.app",

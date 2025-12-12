@@ -313,14 +313,14 @@ function Hero() {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                             className: "text-4xl md:text-6xl lg:text-7xl font-bold leading-tight",
                             children: [
-                                "Intelligent Solutions. ",
+                                "Cut Costs. Automate Work.  ",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "text-secondary",
-                                    children: "Empowered Futures."
+                                    children: "Make Better Decisions."
                                 }, void 0, false, {
                                     fileName: "[project]/vaiku/components/hero.tsx",
                                     lineNumber: 114,
-                                    columnNumber: 36
+                                    columnNumber: 38
                                 }, this)
                             ]
                         }, void 0, true, {
@@ -330,7 +330,7 @@ function Hero() {
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                             className: "text-md md:text-lg text-white/80 max-w-2xl",
-                            children: "We build scalable AI & software solutions that transform businesses — from automation to advanced intelligence."
+                            children: "We build AI systems that eliminate manual tasks, automate workflows, and give you real-time insights — so your team can do more with less.        "
                         }, void 0, false, {
                             fileName: "[project]/vaiku/components/hero.tsx",
                             lineNumber: 117,
@@ -345,7 +345,7 @@ function Hero() {
                                     children: "Explore Services"
                                 }, void 0, false, {
                                     fileName: "[project]/vaiku/components/hero.tsx",
-                                    lineNumber: 122,
+                                    lineNumber: 121,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -355,13 +355,13 @@ function Hero() {
                                     children: "Get a Consultation"
                                 }, void 0, false, {
                                     fileName: "[project]/vaiku/components/hero.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 128,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/vaiku/components/hero.tsx",
-                            lineNumber: 121,
+                            lineNumber: 120,
                             columnNumber: 11
                         }, this)
                     ]
@@ -446,27 +446,27 @@ function Services() {
     }["Services.useEffect"], []);
     const services = [
         {
-            icon: __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$brain$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Brain$3e$__["Brain"],
-            title: "AI & Data Analytics",
-            description: "Custom machine learning solutions and data-driven insights to unlock business potential.",
-            link: "#"
-        },
-        {
-            icon: __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$cloud$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Cloud$3e$__["Cloud"],
-            title: "Cloud-Native Development",
-            description: "Scalable, secure software systems built on modern cloud infrastructure.",
-            link: "#"
-        },
-        {
             icon: __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$zap$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Zap$3e$__["Zap"],
-            title: "Automation & RPA",
-            description: "Streamline operations with intelligent automation that reduces costs and increases efficiency.",
+            title: "AI Automation",
+            description: "Automate 40–70% of repetitive workflows across operations, finance, and support to reduce costs and increase speed.",
+            link: "#"
+        },
+        {
+            icon: __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$brain$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Brain$3e$__["Brain"],
+            title: "Decision Intelligence Dashboards",
+            description: "Real-time dashboards that turn raw data into clarity—track performance, bottlenecks, and business KPIs instantly.",
             link: "#"
         },
         {
             icon: __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$settings$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Settings$3e$__["Settings"],
-            title: "Industry AI Solutions",
-            description: "Tailored AI solutions designed for your specific industry needs and challenges.",
+            title: "Custom AI Copilots",
+            description: "Task-specific AI assistants that help your team make faster decisions, draft content, process data, and complete daily tasks.",
+            link: "#"
+        },
+        {
+            icon: __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$cloud$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Cloud$3e$__["Cloud"],
+            title: "Predictive Analytics",
+            description: "Forecast demand, detect risks early, and identify trends before they become problems using machine learning insights.",
             link: "#"
         }
     ];
@@ -484,7 +484,7 @@ function Services() {
                             children: "Our Services"
                         }, void 0, false, {
                             fileName: "[project]/vaiku/components/services.tsx",
-                            lineNumber: 58,
+                            lineNumber: 63,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -492,13 +492,13 @@ function Services() {
                             children: "Comprehensive solutions across AI, software engineering, and digital transformation"
                         }, void 0, false, {
                             fileName: "[project]/vaiku/components/services.tsx",
-                            lineNumber: 59,
+                            lineNumber: 64,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/vaiku/components/services.tsx",
-                    lineNumber: 57,
+                    lineNumber: 62,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -522,12 +522,12 @@ function Services() {
                                             size: 24
                                         }, void 0, false, {
                                             fileName: "[project]/vaiku/components/services.tsx",
-                                            lineNumber: 79,
+                                            lineNumber: 84,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/vaiku/components/services.tsx",
-                                        lineNumber: 78,
+                                        lineNumber: 83,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -535,7 +535,7 @@ function Services() {
                                         children: service.title
                                     }, void 0, false, {
                                         fileName: "[project]/vaiku/components/services.tsx",
-                                        lineNumber: 81,
+                                        lineNumber: 86,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -543,7 +543,7 @@ function Services() {
                                         children: service.description
                                     }, void 0, false, {
                                         fileName: "[project]/vaiku/components/services.tsx",
-                                        lineNumber: 82,
+                                        lineNumber: 87,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -551,35 +551,35 @@ function Services() {
                                         children: "Learn more →"
                                     }, void 0, false, {
                                         fileName: "[project]/vaiku/components/services.tsx",
-                                        lineNumber: 83,
+                                        lineNumber: 88,
                                         columnNumber: 19
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/vaiku/components/services.tsx",
-                                lineNumber: 70,
+                                lineNumber: 75,
                                 columnNumber: 17
                             }, this)
                         }, index, false, {
                             fileName: "[project]/vaiku/components/services.tsx",
-                            lineNumber: 69,
+                            lineNumber: 74,
                             columnNumber: 15
                         }, this);
                     })
                 }, void 0, false, {
                     fileName: "[project]/vaiku/components/services.tsx",
-                    lineNumber: 64,
+                    lineNumber: 69,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/vaiku/components/services.tsx",
-            lineNumber: 56,
+            lineNumber: 61,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/vaiku/components/services.tsx",
-        lineNumber: 55,
+        lineNumber: 60,
         columnNumber: 5
     }, this);
 }
@@ -2418,43 +2418,43 @@ function Home() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$components$2f$hero$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/vaiku/app/page.tsx",
-                lineNumber: 14,
+                lineNumber: 15,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$components$2f$services$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/vaiku/app/page.tsx",
-                lineNumber: 15,
+                lineNumber: 16,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$components$2f$case$2d$studies$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/vaiku/app/page.tsx",
-                lineNumber: 16,
+                lineNumber: 17,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$components$2f$why$2d$vaiku$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/vaiku/app/page.tsx",
-                lineNumber: 17,
+                lineNumber: 18,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$components$2f$testimonials$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/vaiku/app/page.tsx",
-                lineNumber: 18,
+                lineNumber: 19,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$components$2f$contact$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/vaiku/app/page.tsx",
-                lineNumber: 19,
+                lineNumber: 20,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$components$2f$footer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/vaiku/app/page.tsx",
-                lineNumber: 20,
+                lineNumber: 21,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/vaiku/app/page.tsx",
-        lineNumber: 13,
+        lineNumber: 14,
         columnNumber: 5
     }, this);
 }

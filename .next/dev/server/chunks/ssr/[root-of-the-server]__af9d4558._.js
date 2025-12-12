@@ -43,7 +43,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$vaiku$2f$node_modules$2f40$v
 ;
 ;
 const metadata = {
-    title: "VAIKU LABS - AI & Software Solutions",
+    title: "Nueralogic - AI & Software Solutions",
     description: "Intelligent Solutions. Empowered Futures. Transforming businesses with AI, cloud-native software development, and digital automation.",
     generator: "v0.app",
     icons: {

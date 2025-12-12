@@ -59,6 +59,32 @@ export default function Contact() {
           </h2>
           <p className="text-lg text-muted-foreground">
             Ready to transform your business with intelligent solutions?
+            {/* Premium Strategy Session Section */}
+<div className="mt-20 bg-gradient-to-br from-neutral-900 to-neutral-800 border border-neutral-700 rounded-2xl p-10 md:p-14 shadow-xl">
+
+{/* Heading */}
+<div className="text-center space-y-4 mb-12">
+  <h3 className="text-3xl md:text-4xl font-semibold text-white">
+    Book Your 30-Minute Free Strategy Session
+  </h3>
+  <p className="text-neutral-400 max-w-2xl mx-auto">
+    A focused, no-obligation consultation where we analyze your goals, 
+    identify opportunities, and co-create a clear execution roadmap.
+  </p>
+</div>
+
+
+
+
+
+{/* CTA */}
+<div className="text-center mt-12">
+  <p className="text-neutral-400 text-sm mb-3">
+    Fill out the contact form below, and we will reach out within 2 hours.
+  </p>
+</div>
+</div>
+
           </p>
         </div>
 

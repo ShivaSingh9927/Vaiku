@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { CheckCircle, Zap, Shield, Lightbulb } from "lucide-react"
 
-export default function WhyVaiku() {
+export default function WhyNueraloic() {
   const [visibleMetrics, setVisibleMetrics] = useState(false)
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function WhyVaiku() {
           <div className="space-y-6 md:space-y-8 animate-slide-in-left">
             <div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 md:mb-4">
-                Why Vaiku Labs
+                Why NueraLogic
               </h2>
               <p className="text-base md:text-lg text-muted-foreground">
                 We combine deep technical expertise with business acumen to deliver solutions that drive real
@@ -93,10 +93,12 @@ export default function WhyVaiku() {
             >
               <div className="space-y-6 md:space-y-8">
                 {[
-                  { value: "25+", label: "AI Products & Solutions Delivered", color: "text-secondary" },
-                  { value: "100%", label: "Client Retention Rate", color: "text-secondary" },
-                  { value: "500M+", label: "Records Processed Annually", color: "text-accent" },
-                  { value: "24/7", label: "Production Support Available", color: "text-secondary" },
+                  { value: "25+", label: "AI Products & Solutions Delivered", color: "text-accent" },
+                  { value: "40-70%", label: "Tasks Automated", color: "text-accent" },
+                  { value: "15-35%", label: "15–35% operational cost reduction", color: "text-accent" },
+                  { value: "87%", label: "Client Retention Rate", color: "text-accent" },
+                  { value: "5M+", label: "Records Processed Annually", color: "text-white" },
+                  { value: "24/7", label: "Production Support Available", color: "text-accent" },
                 ].map((metric, index) => (
                   <div
                     key={index}

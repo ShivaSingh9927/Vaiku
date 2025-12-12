@@ -49,9 +49,9 @@ export default function Hero() {
       <nav className="relative z-20 flex items-center justify-between px-4 md:px-12 py-4 md:py-6">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection("top")}>
           <div className="w-8 md:w-10 h-8 md:h-10 rounded-lg bg-secondary flex items-center justify-center">
-            <span className="text-primary font-bold text-sm md:text-lg">V</span>
+            <span className="text-primary font-bold text-sm md:text-lg">N</span>
           </div>
-          <span className="font-bold text-sm md:text-xl">VAIKU LABS</span>
+          <span className="font-bold text-sm md:text-xl">NueraLogic</span>
         </div>
 
         {/* Desktop menu */}
@@ -72,7 +72,7 @@ export default function Hero() {
             onClick={() => scrollToSection("contact")}
             className="bg-transparent border border-white text-white px-4 py-2 rounded-lg hover:bg-white/10"
           >
-            Get in Touch
+            Book a free call
           </button>
         </div>
 
@@ -107,16 +107,15 @@ export default function Hero() {
       <div className="relative z-20 max-w-6xl mx-auto px-4 md:px-12 py-20 md:py-40 text-center md:text-left">
         <div className="space-y-6 animate-slide-in-left">
           <div className="inline-block px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium">
-            Transforming Business Through Intelligence
+          Trusted by ops teams in Retail • Healthcare • SaaS • Supply Chain
           </div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            Intelligent Solutions. <span className="text-secondary">Empowered Futures.</span>
+          Cut Costs. Automate Work.  <span className="text-secondary">Make Better Decisions.</span>
           </h1>
 
           <p className="text-md md:text-lg text-white/80 max-w-2xl">
-            We build scalable AI & software solutions that transform businesses — from automation to advanced intelligence.
-          </p>
+          We build AI solutions, copilots, automation, and dashboards that reduce manual work and deliver measurable ROI.      </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
             <Button
@@ -131,7 +130,7 @@ export default function Hero() {
               onClick={() => scrollToSection("contact")}
               className="bg-white/10 border-white text-white hover:bg-white/30 px-8 py-6 font-semibold w-full sm:w-auto"
             >
-              Get a Consultation
+              Book a free Call
             </Button>
           </div>
 
