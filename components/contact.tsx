@@ -173,7 +173,7 @@ export default function Contact() {
                 <div>
                   <p className="font-semibold text-foreground">Email</p>
                   <p className="text-muted-foreground text-sm">
-                    shivasinghjadon1924@gmail.com
+                    business@nueralogic.com
                   </p>
                 </div>
               </a>
