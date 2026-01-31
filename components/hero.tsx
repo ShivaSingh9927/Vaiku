@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Vortex } from "@/components/ui/wave-grid-background"
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -24,33 +25,32 @@ export default function Hero() {
     <div className="relative min-h-screen text-white overflow-hidden flex flex-col">
 
       {/* Background Video */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        src="/vecteezy_digital-background-of-connection-structure-with-spheres-and_7237670.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
+      <Vortex
+        className="absolute inset-0 w-full h-full z-0"
+        color="#847AFF"
+        gridSize={60}
+        waveHeight={80}
+        backgroundColor="#1a103c" // Deep purple background
       />
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 z-0" />
 
       {/* Floating Colors */}
       <div className="absolute inset-0 opacity-20 z-0">
-        <div className="absolute top-20 right-20 w-72 h-72 md:w-96 md:h-96 bg-secondary rounded-full blur-3xl animate-float" />
+        <div className="absolute top-10 right-10 w-72 h-72 md:w-96 md:h-96 bg-secondary rounded-full blur-3xl animate-float" />
         <div
-          className="absolute bottom-20 left-20 w-64 h-64 md:w-80 md:h-80 bg-accent rounded-full blur-3xl animate-float"
+          className="absolute bottom-10 left-10 w-64 h-64 md:w-80 md:h-80 bg-accent rounded-full blur-3xl animate-float"
           style={{ animationDelay: "2s" }}
         />
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-20 flex items-center justify-between px-4 md:px-12 py-4 md:py-6">
+      <nav className="relative z-10 flex items-center justify-between px-4 md:px-12 py-4 md:py-6">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection("top")}>
           <div className="w-8 md:w-10 h-8 md:h-10 rounded-lg bg-secondary flex items-center justify-center">
-            <span className="text-primary font-bold text-sm md:text-lg">N</span>
-          </div>
+            <img
+              src="/android-chrome-192x192.png"
+              alt="NueraLogic Logo"
+              className="w-full h-full object-cover"
+            />          </div>
           <span className="font-bold text-sm md:text-xl">NueraLogic</span>
         </div>
 
@@ -107,15 +107,15 @@ export default function Hero() {
       <div className="relative z-20 max-w-6xl mx-auto px-4 md:px-12 py-20 md:py-40 text-center md:text-left">
         <div className="space-y-6 animate-slide-in-left">
           <div className="inline-block px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium">
-          Trusted by ops teams in Retail • Healthcare • SaaS • Supply Chain
+            Trusted by ops teams in Retail • Healthcare • SaaS • Supply Chain
           </div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-          Cut Costs. Automate Work.  <span className="text-secondary">Make Better Decisions.</span>
+            Cut Costs. Automate Work.  <span className="text-secondary">Make Better Decisions.</span>
           </h1>
 
           <p className="text-md md:text-lg text-white/80 max-w-2xl">
-          We build AI solutions, copilots, automation, and dashboards that reduce manual work and deliver measurable ROI.      </p>
+            We build AI solutions, copilots, automation, and dashboards that reduce manual work and deliver measurable ROI.      </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
             <Button
