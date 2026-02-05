@@ -1,12 +1,12 @@
 @import "tailwindcss";
-@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
 
 /* -----------------------------------------------------
    BLUE GEM COLOR PALETTE (converted to OKLCH tones)
    ----------------------------------------------------- */
-
 :root {
   --background: oklch(0.98 0.01 260);     /* very light bluish-white */
   --foreground: oklch(0.14 0.05 260);     /* deep text */

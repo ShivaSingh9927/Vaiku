@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import typography from '@tailwindcss/typography'; // Use import instead of require
+
 export default {
     darkMode: ["class"],
     content: [
@@ -13,9 +15,14 @@ export default {
           secondary: "#0EA5E9", // cyan accent
           accent: "#38BDF8",
           background: "#0A0F1F",
+          // The Navy for headers we discussed
+          navy: {
+            900: "#001A33",
+          },
         },
       },
     },
-    plugins: [],
-  }
-  
+    plugins: [
+      typography, // Add the imported variable here
+    ],
+}
