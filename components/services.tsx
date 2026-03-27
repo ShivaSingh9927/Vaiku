@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Brain, Cloud, Zap, Settings } from "lucide-react"
+import { Brain, Cloud, Zap, Settings,Rocket } from "lucide-react"
 import Link from "next/link"
 
 export default function Services() {
@@ -26,27 +26,45 @@ export default function Services() {
 
   const services = [
     {
-      icon: Brain,
-      title: "AI & Data Analytics",
-      description: "Custom machine learning solutions and data-driven insights to unlock business potential.",
-      link: "#",
-    },
-    {
-      icon: Cloud,
-      title: "Cloud-Native Development",
-      description: "Scalable, secure software systems built on modern cloud infrastructure.",
-      link: "#",
-    },
-    {
       icon: Zap,
-      title: "Automation & RPA",
-      description: "Streamline operations with intelligent automation that reduces costs and increases efficiency.",
+      title: "AI Automation",
+      description:
+        "Eliminate manual work with end-to-end AI automation that cuts costs and removes repetitive tasks from your operations.",
+      link: "#",
+    },
+    {
+      icon: Brain,
+      title: "Decision Intelligence Dashboards",
+      description:
+        "Get a unified real-time view of your business—no more fragmented systems, slow reporting, or delayed decisions.",
       link: "#",
     },
     {
       icon: Settings,
-      title: "Industry AI Solutions",
-      description: "Tailored AI solutions designed for your specific industry needs and challenges.",
+      title: "Custom AI Solutions",
+      description:
+        "AI solutions built for your workflows—assist with decisions, summaries, content, and routine processes instantly.",
+      link: "#",
+    },
+    {
+      icon: Cloud,
+      title: "Predictive Analytics",
+      description:
+        "Predict demand, risks, trends, and bottlenecks before they become problems using advanced machine learning.",
+      link: "#",
+    },
+    {
+      icon: Rocket,
+      title: "MVP & Product Development",
+      description:
+        "Turn your idea into a working web or AI product—fast. Full development, integration, and deployment.",
+      link: "#",
+    },
+    {
+      icon: Settings,
+      title: "Systems Integration",
+      description:
+        "Break silos with seamless integrations between your CRM, ERP, analytics, and internal tools.",
       link: "#",
     },
   ]
@@ -55,7 +73,7 @@ export default function Services() {
     <section id="services" className="py-16 md:py-32 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-12">
         <div className="text-center space-y-3 md:space-y-4 mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">Our Services</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">How We Solve Your Biggest Problems</h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Comprehensive solutions across AI, software engineering, and digital transformation
           </p>
@@ -81,7 +99,6 @@ export default function Services() {
                   <h3 className="text-base md:text-lg font-bold text-foreground mb-2">{service.title}</h3>
                   <p className="text-muted-foreground text-xs md:text-sm">{service.description}</p>
                   <div className="mt-3 md:mt-4 text-primary font-semibold text-xs md:text-sm group-hover:translate-x-1 transition-transform">
-                    Learn more →
                   </div>
                 </div>
               </Link>
@@ -92,3 +109,5 @@ export default function Services() {
     </section>
   )
 }
+
+

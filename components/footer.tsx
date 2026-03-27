@@ -12,9 +12,12 @@ export default function Footer() {
           <div className="animate-fade-in-up">
             <div className="flex items-center gap-2 mb-3 md:mb-4">
               <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0">
-                <span className="text-primary font-bold">V</span>
-              </div>
-              <span className="font-bold text-lg">VAIKU LABS</span>
+              <img 
+                      src="/android-chrome-192x192.png" 
+                      alt="NueraLogic Logo" 
+                      className="w-full h-full object-cover"
+                    />              </div>
+              <span className="font-bold text-lg">NueraLogic</span>
             </div>
             <p className="text-white/70 text-xs md:text-sm">Intelligent Solutions. Empowered Futures.</p>
           </div>
@@ -78,14 +81,14 @@ export default function Footer() {
             <h4 className="font-bold mb-3 md:mb-4 text-secondary text-sm md:text-base">Connect</h4>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/nueralogic"
                 className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
               </a>
               <a
-                href="mailto:info@vaikutabs.com"
+                href="mailto:business@nueralogic.com"
                 className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
                 aria-label="Email"
               >
@@ -98,7 +101,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-white/10 pt-6 md:pt-8">
           <div className="grid sm:grid-cols-2 gap-3 md:gap-4 text-xs md:text-sm text-white/60">
-            <div>© 2025 Vaiku Labs. All rights reserved.</div>
+            <div>© 2026 Nueralogic. All rights reserved.</div>
             <div className="flex gap-3 md:gap-4 sm:justify-end">
               <Link href="#" className="hover:text-white transition-colors">
                 Privacy Policy
